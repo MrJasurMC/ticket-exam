@@ -11,7 +11,5 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  SeatType.associate = (models) => {};
-
   return SeatType;
 };

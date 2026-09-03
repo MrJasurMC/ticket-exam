@@ -11,7 +11,5 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  Gender.associate = (models) => {};
-
   return Gender;
 };

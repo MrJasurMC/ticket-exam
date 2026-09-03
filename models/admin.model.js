@@ -54,7 +54,5 @@ module.exports = (sequelize, DataTypes) => {
     return values;
   };
 
-  Admin.associate = (models) => {};
-
   return Admin;
 };

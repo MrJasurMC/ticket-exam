@@ -11,7 +11,5 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  TicketStatus.associate = (models) => {};
-
   return TicketStatus;
 };

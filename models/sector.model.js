@@ -11,7 +11,5 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  Sector.associate = (models) => {};
-
   return Sector;
 };

@@ -15,7 +15,5 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  Flat.associate = (models) => {};
-
   return Flat;
 };

@@ -11,7 +11,5 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  DeliveryMethod.associate = (models) => {};
-
   return DeliveryMethod;
 };

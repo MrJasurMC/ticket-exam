@@ -15,7 +15,5 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  Discount.associate = (models) => {};
-
   return Discount;
 };

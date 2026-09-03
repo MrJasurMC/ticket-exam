@@ -11,7 +11,5 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  Lang.associate = (models) => {};
-
   return Lang;
 };

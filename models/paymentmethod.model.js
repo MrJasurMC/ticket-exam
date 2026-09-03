@@ -11,7 +11,5 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  PaymentMethod.associate = (models) => {};
-
   return PaymentMethod;
 };

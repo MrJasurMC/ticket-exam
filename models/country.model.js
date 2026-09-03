@@ -11,7 +11,5 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  Country.associate = (models) => {};
-
   return Country;
 };
