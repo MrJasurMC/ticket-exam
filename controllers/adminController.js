@@ -1,6 +1,40 @@
 const { Admin } = require('../models');
 const { ValidateAdmin, ValidateAdminUpdate } = require('../validation/adminValidation');
+const { ValidateAdminLogin } = require('../validation/authValidation');
 const { Op } = require('sequelize');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const { ACCESS_TOKEN_SECRET } = require('../config/constants');
+
+exports.login = async (req, res) => {
+    const { error } = ValidateAdminLogin(req.body);
+    if (error) {
+        return res.status(400).json({ error: error.details[0].message });
+    }
+
+    try {
+        const { login, password } = req.body;
+        const admin = await Admin.scope('withSensitive').findOne({ where: { login } });
+        if (!admin || !admin.is_active) {
+            return res.status(401).send({ error: "Invalid login or password" });
+        }
+
+        const isMatch = await bcrypt.compare(password, admin.hashed_password);
+        if (!isMatch) {
+            return res.status(401).send({ error: "Invalid login or password" });
+        }
+
+        const token = jwt.sign(
+            { id: admin.id, role: "admin", is_creator: admin.is_creator },
+            ACCESS_TOKEN_SECRET,
+            { expiresIn: "1d" }
+        );
+
+        res.status(200).send({ token, admin: { id: admin.id, name: admin.name, login: admin.login, is_creator: admin.is_creator } });
+    } catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+};
 
 exports.createAdmin = async (req, res) => {
     const { error } = ValidateAdmin(req.body);

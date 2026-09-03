@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+
 module.exports = (sequelize, DataTypes) => {
   const Customer = sequelize.define('Customer', {
     id: {
@@ -42,7 +44,31 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
+  }, {
+    defaultScope: {
+      attributes: { exclude: ['hashed_password', 'hashed_refresh_token'] },
+    },
+    scopes: {
+      withSensitive: { attributes: {} },
+    },
   })
+
+  Customer.beforeSave(async (customer, options) => {
+    if (customer.changed('hashed_password')) {
+      customer.hashed_password = await bcrypt.hash(customer.hashed_password, 10);
+    }
+  });
+
+  
+  
+  
+  
+  Customer.prototype.toJSON = function () {
+    const values = Object.assign({}, this.get());
+    delete values.hashed_password;
+    delete values.hashed_refresh_token;
+    return values;
+  };
 
   Customer.associate = (models) => {
     Customer.belongsTo(models.Gender, {

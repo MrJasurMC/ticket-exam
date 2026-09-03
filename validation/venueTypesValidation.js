@@ -2,16 +2,16 @@ const Joi = require('joi');
 
 function ValidateVenueTypes(venueTypes) {
     const schema = Joi.object({
-        venueId: Joi.number().integer().required(),
-        typeId: Joi.number().integer().required(),
+        venue_id: Joi.number().integer().required(),
+        type_id: Joi.number().integer().required(),
     });
     return schema.validate(venueTypes);
 }
 
 function ValidateVenueTypesUpdate(venueTypes) {
     const schema = Joi.object({
-        venueId: Joi.number().integer().optional(),
-        typeId: Joi.number().integer().optional(),
+        venue_id: Joi.number().integer().optional(),
+        type_id: Joi.number().integer().optional(),
     });
     return schema.validate(venueTypes);
 }

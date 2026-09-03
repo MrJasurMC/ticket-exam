@@ -79,9 +79,9 @@ exports.searchCustomerCards = async (req, res) => {
         const customerCards = await CustomerCard.findAll({
             where: {
                 [Op.or]: [
-                    { name: { [Op.like]: `%${query}%` } },
-                    { phone: { [Op.like]: `%${query}%` } },
-                    { number: { [Op.like]: `%${query}%` } }
+                    { name: { [Op.iLike]: `%${query}%` } },
+                    { phone: { [Op.iLike]: `%${query}%` } },
+                    { number: { [Op.iLike]: `%${query}%` } }
                 ]
             },
             include: [{ model: Customer, as: 'customer' }]

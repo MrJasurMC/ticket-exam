@@ -32,6 +32,13 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
+  }, {
+    defaultScope: {
+      attributes: { exclude: ['hashed_password', 'hashed_refresh_token'] },
+    },
+    scopes: {
+      withSensitive: { attributes: {} },
+    },
   });
 
   Admin.beforeSave(async (admin, options) => {
@@ -39,6 +46,13 @@ module.exports = (sequelize, DataTypes) => {
       admin.hashed_password = await bcrypt.hash(admin.hashed_password, 10);
     }
   });
+
+  Admin.prototype.toJSON = function () {
+    const values = Object.assign({}, this.get());
+    delete values.hashed_password;
+    delete values.hashed_refresh_token;
+    return values;
+  };
 
   Admin.associate = (models) => {};
 

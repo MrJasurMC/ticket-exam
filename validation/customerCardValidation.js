@@ -8,8 +8,6 @@ function ValidateCustomerCard(card) {
         number: Joi.string().required(),
         year: Joi.number().integer().required(),
         month: Joi.number().integer().required(),
-        is_active: Joi.boolean().optional(),
-        is_main: Joi.boolean().optional()
     });
 
     return schema.validate(card);
@@ -23,8 +21,6 @@ function ValidateCustomerCardUpdate(card) {
         number: Joi.string().optional(),
         year: Joi.number().integer().optional(),
         month: Joi.number().integer().optional(),
-        is_active: Joi.boolean().optional(),
-        is_main: Joi.boolean().optional()
     });
 
     return schema.validate(card);

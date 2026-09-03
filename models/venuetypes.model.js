@@ -5,11 +5,11 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    venueId: {
+    venue_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    typeId: {
+    type_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
@@ -17,11 +17,11 @@ module.exports = (sequelize, DataTypes) => {
 
   VenueTypes.associate = (models) => {
     VenueTypes.belongsTo(models.Venue, {
-      foreignKey: "venueId",
+      foreignKey: "venue_id",
       as: "venue",
     });
     VenueTypes.belongsTo(models.Types, {
-      foreignKey: "typeId",
+      foreignKey: "type_id",
       as: "type",
     });
   };

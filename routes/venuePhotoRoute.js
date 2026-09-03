@@ -22,7 +22,7 @@ const venuePhotoController = require('../controllers/venuePhotoController');
  *           schema:
  *             type: object
  *             properties:
- *               venueId:
+ *               venue_id:
  *                 type: integer
  *               url:
  *                 type: string
@@ -91,7 +91,7 @@ router.get('/venue-photos/:id', venuePhotoController.getVenuePhotoById);
  *           schema:
  *             type: object
  *             properties:
- *               venueId:
+ *               venue_id:
  *                 type: integer
  *               url:
  *                 type: string

@@ -1,6 +1,40 @@
 const { Customer } = require('../models');
 const { ValidateCustomer, ValidateCustomerUpdate } = require('../validation/customerValidation');
+const { ValidateCustomerLogin } = require('../validation/authValidation');
 const { Op } = require('sequelize');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const { ACCESS_TOKEN_SECRET } = require('../config/constants');
+
+exports.login = async (req, res) => {
+    const { error } = ValidateCustomerLogin(req.body);
+    if (error) {
+        return res.status(400).json({ error: error.details[0].message });
+    }
+
+    try {
+        const { email, password } = req.body;
+        const customer = await Customer.scope('withSensitive').findOne({ where: { email } });
+        if (!customer) {
+            return res.status(401).send({ error: "Invalid email or password" });
+        }
+
+        const isMatch = await bcrypt.compare(password, customer.hashed_password);
+        if (!isMatch) {
+            return res.status(401).send({ error: "Invalid email or password" });
+        }
+
+        const token = jwt.sign(
+            { id: customer.id, role: "customer" },
+            ACCESS_TOKEN_SECRET,
+            { expiresIn: "7d" }
+        );
+
+        res.status(200).send({ token, customer: { id: customer.id, first_name: customer.first_name, last_name: customer.last_name, email: customer.email } });
+    } catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+};
 
 exports.createCustomer = async (req, res) => {
     const { error } = ValidateCustomer(req.body);
@@ -67,8 +101,6 @@ exports.deleteCustomer = async (req, res) => {
 
 exports.searchCustomers = async (req, res) => {
     try {
-        console.log("Query:", req.query.query);
-
         const { query } = req.query;
         if (!query) {
             return res.status(400).send({ error: "Search query is required" });
@@ -77,9 +109,9 @@ exports.searchCustomers = async (req, res) => {
         const customers = await Customer.findAll({
             where: {
                 [Op.or]: [
-                    { first_name: { [Op.like]: `%${query}%` } },
-                    { last_name: { [Op.like]: `%${query}%` } },
-                    { email: { [Op.like]: `%${query}%` } }
+                    { first_name: { [Op.iLike]: `%${query}%` } },
+                    { last_name: { [Op.iLike]: `%${query}%` } },
+                    { email: { [Op.iLike]: `%${query}%` } }
                 ]
             }
         });

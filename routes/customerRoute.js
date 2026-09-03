@@ -4,6 +4,33 @@ const customerController = require('../controllers/customerController');
 
 /**
  * @swagger
+ * /api/customers/login:
+ *   post:
+ *     tags: [Customers]
+ *     summary: Customer login, returns a JWT
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Login successful, token returned
+ *       400:
+ *         description: Invalid input
+ *       401:
+ *         description: Invalid credentials
+ */
+router.post('/customers/login', customerController.login);
+
+/**
+ * @swagger
  * tags:
  *   name: Customers
  *   description: Customer management

@@ -22,9 +22,9 @@ const venueTypesController = require('../controllers/venueTypesController');
  *           schema:
  *             type: object
  *             properties:
- *               venueId:
+ *               venue_id:
  *                 type: integer
- *               typeId:
+ *               type_id:
  *                 type: integer
  *     responses:
  *       201:
@@ -91,9 +91,9 @@ router.get('/venue-types/:id', venueTypesController.getVenueTypesById);
  *           schema:
  *             type: object
  *             properties:
- *               venueId:
+ *               venue_id:
  *                 type: integer
- *               typeId:
+ *               type_id:
  *                 type: integer
  *     responses:
  *       200:

@@ -17,7 +17,7 @@ function ValidateBookingUpdate(booking) {
         delivery_method_id: Joi.number().integer().allow(null).optional(),
         discount_id: Joi.number().integer().allow(null).optional(),
         status_id: Joi.number().integer().allow(null).optional(),
-        finished: Joi.date().allow(null).optional(),
+        finishedAt: Joi.date().allow(null).optional(),
     });
     return schema.validate(booking);
 }

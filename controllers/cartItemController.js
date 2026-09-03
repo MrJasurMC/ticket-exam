@@ -8,6 +8,16 @@ exports.createCartItem = async (req, res) => {
     }
 
     try {
+        
+        
+        const conflictingItem = await CartItem.findOne({
+            where: { ticket_id: req.body.ticket_id },
+            include: [{ model: Cart, as: 'cart', where: { finishedAt: null } }],
+        });
+        if (conflictingItem) {
+            return res.status(409).send({ error: "This ticket is already in another active cart" });
+        }
+
         const cartItem = await CartItem.create(req.body);
         res.status(201).send(cartItem);
     } catch (error) {

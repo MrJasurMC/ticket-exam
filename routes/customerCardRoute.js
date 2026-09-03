@@ -11,7 +11,7 @@ const customerCardController = require('../controllers/customerCardController');
 
 /**
  * @swagger
- * /api/customersCards:
+ * /api/customer-cards:
  *   post:
  *     tags: [CustomerCards]
  *     summary: Create a new card for a customer
@@ -46,11 +46,11 @@ const customerCardController = require('../controllers/customerCardController');
  *       500:
  *         description: Server error
  */
-router.post('/customersCards', customerCardController.createCard);
+router.post('/customer-cards', customerCardController.createCard);
 
 /**
  * @swagger
- * /api/customersCards:
+ * /api/customer-cards:
  *   get:
  *     tags: [CustomerCards]
  *     summary: Get all customer cards
@@ -60,11 +60,11 @@ router.post('/customersCards', customerCardController.createCard);
  *       500:
  *         description: Server error
  */
-router.get('/customersCards', customerCardController.getCards);
+router.get('/customer-cards', customerCardController.getCards);
 
 /**
  * @swagger
- * /api/customersCards/search:
+ * /api/customer-cards/search:
  *   get:
  *     tags: [CustomerCards]
  *     summary: Search cards by name, phone or number
@@ -83,11 +83,11 @@ router.get('/customersCards', customerCardController.getCards);
  *       500:
  *         description: Server error
  */
-router.get('/customersCards/search', customerCardController.searchCustomerCards);
+router.get('/customer-cards/search', customerCardController.searchCustomerCards);
 
 /**
  * @swagger
- * /api/customersCards/{id}:
+ * /api/customer-cards/{id}:
  *   get:
  *     tags: [CustomerCards]
  *     summary: Get card by ID
@@ -106,11 +106,11 @@ router.get('/customersCards/search', customerCardController.searchCustomerCards)
  *       500:
  *         description: Server error
  */
-router.get('/customersCards/:id', customerCardController.getCardById);
+router.get('/customer-cards/:id', customerCardController.getCardById);
 
 /**
  * @swagger
- * /api/customersCards/{id}:
+ * /api/customer-cards/{id}:
  *   put:
  *     tags: [CustomerCards]
  *     summary: Update card by ID
@@ -148,11 +148,11 @@ router.get('/customersCards/:id', customerCardController.getCardById);
  *       500:
  *         description: Server error
  */
-router.put('/customersCards/:id', customerCardController.updateCard);
+router.put('/customer-cards/:id', customerCardController.updateCard);
 
 /**
  * @swagger
- * /api/customersCards/{id}:
+ * /api/customer-cards/{id}:
  *   delete:
  *     tags: [CustomerCards]
  *     summary: Delete card by ID
@@ -171,6 +171,6 @@ router.put('/customersCards/:id', customerCardController.updateCard);
  *       500:
  *         description: Server error
  */
-router.delete('/customersCards/:id', customerCardController.deleteCard);
+router.delete('/customer-cards/:id', customerCardController.deleteCard);
 
 module.exports = router;

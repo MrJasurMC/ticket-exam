@@ -105,7 +105,7 @@ router.get('/bookings/:id', bookingController.getBookingById);
  *                 type: integer
  *               status_id:
  *                 type: integer
- *               finished:
+ *               finishedAt:
  *                 type: string
  *                 format: date-time
  *     responses:

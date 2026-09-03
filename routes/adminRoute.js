@@ -4,6 +4,33 @@ const adminController = require('../controllers/adminController');
 
 /**
  * @swagger
+ * /api/admins/login:
+ *   post:
+ *     tags: [Admins]
+ *     summary: Admin login, returns a JWT
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               login:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Login successful, token returned
+ *       400:
+ *         description: Invalid input
+ *       401:
+ *         description: Invalid credentials
+ */
+router.post('/admins/login', adminController.login);
+
+/**
+ * @swagger
  * tags:
  *   name: Admins
  *   description: Admin management

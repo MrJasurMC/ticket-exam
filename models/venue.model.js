@@ -49,11 +49,11 @@ module.exports = (sequelize, DataTypes) => {
       as: "district",
     });
     Venue.hasMany(models.VenuePhoto, {
-      foreignKey: "venueId",
+      foreignKey: "venue_id",
       as: "photos",
     });
     Venue.hasMany(models.VenueTypes, {
-      foreignKey: "venueId",
+      foreignKey: "venue_id",
       as: "venueTypes",
     });
     Venue.hasMany(models.Seat, {
