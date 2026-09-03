@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     venue_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      field: 'venueId',
     },
     url: {
       type: DataTypes.STRING,

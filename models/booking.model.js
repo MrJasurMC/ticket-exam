@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     finishedAt: {
       type: DataTypes.DATE,
       allowNull: true,
+      field: 'finished',
     },
     payment_method_id: {
       type: DataTypes.INTEGER,
